@@ -8,7 +8,14 @@ import { useWordleData } from "../hooks/useWordleData";
 
 function Game() {
     const { gameOver } = useContext(AppContext);
-    const { currentStatus, loading, error, getCurrentStatus } = useWordleData();
+    const {
+        currentStatus,
+        loading,
+        error,
+        getCurrentStatus,
+        gameSeriesOver,
+        gameSeriesStarted
+    } = useWordleData();
 
     useEffect(() => {
         getCurrentStatus();
@@ -28,6 +35,22 @@ function Game() {
         return (
             <div className="game">
                 <span>{error}</span>
+            </div>
+        )
+    }
+
+    if (!gameSeriesStarted) {
+        return (
+            <div className="game">
+                <span>Game not started yet. Stay tuned!!</span>
+            </div>
+        )
+    }
+
+    if (gameSeriesOver) {
+        return (
+            <div className="game">
+                <span>That's a wrap. See you at Excel!</span>
             </div>
         )
     }
