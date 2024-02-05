@@ -1,9 +1,11 @@
 import "./App.css";
-import Board from "./components/Board";
-import Keyboard from "./components/Keyboard";
 import { boardDefault, generateWordSet } from "./Words";
 import React, { useState, createContext, useEffect } from "react";
-import GameOver from "./components/GameOver";
+import Game from "./pages/Game";
+import { ApiState } from './contexts/api/apiState';
+import { UserState } from './contexts/user/userState';
+import Navbar from "./components/Navbar/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export const AppContext = createContext();
 
@@ -69,31 +71,34 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <nav>
-        <h1>Wordle</h1>
-      </nav>
-      <AppContext.Provider
-        value={{
-          board,
-          setBoard,
-          currAttempt,
-          setCurrAttempt,
-          correctWord,
-          onSelectLetter,
-          onDelete,
-          onEnter,
-          setDisabledLetters,
-          disabledLetters,
-          gameOver,
-        }}
-      >
-        <div className="game">
-          <Board />
-          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+    <ApiState>
+      <UserState>
+        <div className="App">
+          <Navbar />
+          <AppContext.Provider
+            value={{
+              board,
+              setBoard,
+              currAttempt,
+              setCurrAttempt,
+              correctWord,
+              onSelectLetter,
+              onDelete,
+              onEnter,
+              setDisabledLetters,
+              disabledLetters,
+              gameOver,
+            }}
+          >
+
+            <ProtectedRoute>
+              <Game />
+            </ProtectedRoute>
+
+          </AppContext.Provider>
         </div>
-      </AppContext.Provider>
-    </div>
+      </UserState>
+    </ApiState>
   );
 }
 
