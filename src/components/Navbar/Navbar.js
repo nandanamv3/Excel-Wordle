@@ -26,8 +26,6 @@ export default function Navbar() {
     );
   }
 
-  console.log(loginUrl);
-
   if (!userData.loggedIn) {
     return (
       <nav>

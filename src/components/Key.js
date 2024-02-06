@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { AppContext } from "../App";
+import GameContext from "../contexts/game/gameContext";
 
 function Key({ keyVal, bigKey, disabled }) {
   const { gameOver, onSelectLetter, onDelete, onEnter } =
-    useContext(AppContext);
+    useContext(GameContext);
 
   const selectLetter = () => {
     if (gameOver.gameOver) return;
@@ -18,7 +18,7 @@ function Key({ keyVal, bigKey, disabled }) {
   return (
     <div
       className="key"
-      id={bigKey ? "big" : disabled && "disabled"}
+      id={bigKey ? "big" : disabled ? "disabled" : ''}
       onClick={selectLetter}
     >
       {keyVal}

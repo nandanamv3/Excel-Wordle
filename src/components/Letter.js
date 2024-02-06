@@ -1,25 +1,23 @@
-import React, { useContext, useEffect } from "react";
-import { AppContext } from "../App";
+import React, { useContext } from "react";
+import GameContext from "../contexts/game/gameContext";
 
 function Letter({ letterPos, attemptVal }) {
-  const { board, setDisabledLetters, currAttempt, correctWord } =
-    useContext(AppContext);
-  const letter = board[attemptVal][letterPos];
-  const correct = correctWord.toUpperCase()[letterPos] === letter;
-  const almost =
-    !correct && letter !== "" && correctWord.toUpperCase().includes(letter);
-  const letterState =
-    currAttempt.attempt > attemptVal &&
-    (correct ? "correct" : almost ? "almost" : "error");
+  const { board, currAttempt, boardEval } =
+    useContext(GameContext);
 
-  useEffect(() => {
-    if (letter !== "" && !correct && !almost) {
-      console.log(letter);
-      setDisabledLetters((prev) => [...prev, letter]);
-    }
-  }, [currAttempt.attempt]);
+  const letter = board[attemptVal][letterPos];
+  const correct = boardEval[attemptVal][letterPos] === 2;
+  const almost = boardEval[attemptVal][letterPos] === 1;
+  const letterState =
+    currAttempt.attempt > attemptVal ?
+      (correct ? "correct" : almost ? "almost" : "error") : ''
+
   return (
-    <div className="letter" id={letterState}>
+    <div
+      className="letter"
+      id={letterState}
+      key={`${letterPos}-${attemptVal}-${boardEval[letterPos][attemptVal]}`}
+    >
       {letter}
     </div>
   );

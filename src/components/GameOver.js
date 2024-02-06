@@ -1,16 +1,10 @@
-import React, { useContext } from "react";
-import { AppContext } from "../App";
+import React from "react";
 
-function GameOver() {
-  const {
-    board,
-    setBoard,
-    currAttempt,
-    gameOver,
-    onSelectLetter,
-    correctWord,
-    onDelete,
-  } = useContext(AppContext);
+function GameOver({
+  currAttempt,
+  gameOver,
+  correctWord,
+}) {
   return (
     <div className="gameOver">
       <h3>
@@ -18,7 +12,9 @@ function GameOver() {
           ? "You Correctly Guessed the Wordle"
           : "You Failed to Guess the Word"}
       </h3>
-      <h1>Correct Word: {correctWord}</h1>
+      {correctWord && (
+        <h1>Correct Word: {correctWord}</h1>
+      )}
       {gameOver.guessedWord && (
         <h3>You guessed in {currAttempt.attempt} attempts</h3>
       )}

@@ -1,29 +1,22 @@
 import "./Game.css";
 import Board from "../components/Board";
 import Keyboard from "../components/Keyboard";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import GameOver from "../components/GameOver";
-import { AppContext } from "../App";
-import { useWordleData } from "../hooks/useWordleData";
+import GameContext from "../contexts/game/gameContext";
 
 function Game() {
-    const { gameOver } = useContext(AppContext);
     const {
-        currentStatus,
-        loading,
+        gameOver,
+        currentStatusLoading,
         error,
-        getCurrentStatus,
         gameSeriesOver,
-        gameSeriesStarted
-    } = useWordleData();
+        gameSeriesStarted,
+        currAttempt
+    } = useContext(GameContext);
 
-    useEffect(() => {
-        getCurrentStatus();
-    }, []);
 
-    console.log('currentStatus', currentStatus);
-
-    if (loading) {
+    if (currentStatusLoading) {
         return (
             <div className="game">
                 <span>Loading...</span>
@@ -58,7 +51,11 @@ function Game() {
     return (
         <div className="game">
             <Board />
-            {gameOver.gameOver ? <GameOver /> : <Keyboard />}
+            {gameOver.gameOver ? <GameOver 
+                currAttempt={currAttempt}
+                gameOver={gameOver}
+                correctWord={undefined}
+            /> : <Keyboard />}
         </div>
 
     );
