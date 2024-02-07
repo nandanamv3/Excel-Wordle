@@ -38,7 +38,9 @@ export default function Navbar() {
 
   return (
     <nav>
-      <h1>Wordle</h1>
+      <a href="/">
+        <h1>Wordle</h1>
+      </a>
       <img onClick={logout} className="avatar" src={userData.profilePictureUrl} alt={userData.name} />
     </nav>
   )

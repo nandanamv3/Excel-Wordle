@@ -1,9 +1,9 @@
 import "./Game.css";
-import Board from "../components/Board";
-import Keyboard from "../components/Keyboard";
+import Board from "../../components/Board";
+import Keyboard from "../../components/Keyboard";
 import { useContext } from "react";
-import GameOver from "../components/GameOver";
-import GameContext from "../contexts/game/gameContext";
+import GameOver from "../../components/GameOver";
+import GameContext from "../../contexts/game/gameContext";
 
 function Game() {
     const {

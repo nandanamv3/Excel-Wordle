@@ -1,11 +1,34 @@
 import "./App.css";
 import React from "react";
-import Game from "./pages/Game";
+import Game from "./pages/Game/Game";
 import { ApiState } from './contexts/api/apiState';
 import { UserState } from './contexts/user/userState';
 import Navbar from "./components/Navbar/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { GameState } from "./contexts/game/gameState";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Home from "./pages/Home/Home";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <Home />
+    ),
+  },
+  {
+    path: "/game",
+    element: (
+      <ProtectedRoute>
+        <Game />
+      </ProtectedRoute>
+    ),
+  }
+]);
+
 
 function App() {
 
@@ -15,9 +38,7 @@ function App() {
         <GameState>
           <div className="App">
             <Navbar />
-            <ProtectedRoute>
-              <Game />
-            </ProtectedRoute>
+            <RouterProvider router={router} />
           </div>
         </GameState>
       </UserState>
