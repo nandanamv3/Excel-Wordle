@@ -13,7 +13,7 @@ const maxAttempts = 5;
  */
 
 export function GameState({ children }) {
-    const { axiosWordlePrivate } = useContext(ApiContext);
+    const { axiosWordlePrivate, refreshToken } = useContext(ApiContext);
 
     const [wordLength, setWordLength] = useState(5);
     const [board, setBoard] = useState(boardDefault);
@@ -68,6 +68,7 @@ export function GameState({ children }) {
                 setCurrentStatusLoading(true);
                 setError('');
                 await registerIfNotRegistered();
+                setError('');
                 const response = await axiosWordlePrivate.get('/current-status');
                 const wordLength = response.data.wordlength;
 
@@ -101,6 +102,19 @@ export function GameState({ children }) {
                     }
                 }
 
+                /**
+                 * For attempts which contain repeated letters, but solution has single letter
+                 * the evaluation will be '0' thus we remove all okay letters (1, 2) from disabledLetters
+                 * eg: Solution: LIFE, Attempt: IFFY
+                 */
+                for (let i = 0; i < guessedWords.length; i++) {
+                    for (let j = 0; j < guessedWords[i].length; j++) {
+                        if (fullBoardEval[i][j] === 1 || fullBoardEval[i][j] === 2) {
+                            disabledLetters.delete(guessedWords[i][j]);
+                        }
+                    }
+                }
+
                 setDisabledLetters(Array.from(disabledLetters));
                 setBoardEval(fullBoardEval);
                 setBoard(boardArray);
@@ -112,7 +126,6 @@ export function GameState({ children }) {
                     gameOver: response.data.attempts.success || response.data.attempts.attempts === maxAttempts,
                     guessedWord: response.data.attempts.success,
                 })
-
             } catch (error) {
                 setError(getErrMsg(error));
             } finally {
@@ -186,6 +199,18 @@ export function GameState({ children }) {
                 }
             }
         }
+        /**
+         * For attempts which contain repeated letters, but solution has single letter
+         * the evaluation will be '0' thus we remove all okay letters (1, 2) from disabledLetters
+         * eg: Solution: LIFE, Attempt: IFFY
+         */
+        for (let i = 0; i < guessedWords.length; i++) {
+            for (let j = 0; j < guessedWords[i].length; j++) {
+                if (fullBoardEval[i][j] === 1 || fullBoardEval[i][j] === 2) {
+                    disabledLetters.delete(guessedWords[i][j]);
+                }
+            }
+        }
         setDisabledLetters(Array.from(disabledLetters));
 
 
@@ -217,9 +242,8 @@ export function GameState({ children }) {
 
     useEffect(() => {
         getCurrentStatus();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [axiosWordlePrivate, refreshToken]);
 
     return (
         <GameContext.Provider
