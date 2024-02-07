@@ -14,9 +14,9 @@ export function ApiState({ children }) {
     if (!wordleBaseUrl) {
         throw new Error('REACT_APP_WORDLE_BACKEND_BASE_URL is undefined');
     }
-	if (!process.env.REACT_APP_AUTH_REDIR_URL) {
-		throw new Error('REACT_APP_AUTH_REDIR_URL is undefined');
-	}
+    if (!process.env.REACT_APP_AUTH_REDIR_URL) {
+        throw new Error('REACT_APP_AUTH_REDIR_URL is undefined');
+    }
 
     const [refreshToken, setRefreshToken] = useLocalStorage('refreshToken', '');
     const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
@@ -152,6 +152,38 @@ export function ApiState({ children }) {
      */
     axiosAccPrivate.interceptors.response.use(...retryWithAt);
     axiosWordlePrivate.interceptors.response.use(...retryWithAt);
+
+
+    const retryWithoutAt = [
+        (res) => {
+            return res;
+        },
+
+        async (err) => {
+            const originalConfig = err.config;
+
+            if (
+                !originalConfig._retry &&
+                err?.code === 'ECONNABORTED') // For cold start timeouts
+            {
+                console.log('Retrying Coldstart Timeout');
+                originalConfig._retry = true;
+
+                try {
+                    return await axios(originalConfig);
+                } catch (_error) {
+                    return Promise.reject(_error);
+                }
+            }
+            return Promise.reject(err);
+        },
+    ];
+
+    axiosAccPublic.interceptors.response.clear();
+    axiosWordlePublic.interceptors.response.clear();
+
+    axiosAccPublic.interceptors.response.use(...retryWithoutAt);
+    axiosWordlePublic.interceptors.response.use(...retryWithoutAt);
 
     return (
         <ApiContext.Provider

@@ -11,6 +11,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import Leaderboard from "./pages/Leaderboard/Leaderboard";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Game />
       </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/leaderboard",
+    element: (
+      <Leaderboard />
     ),
   }
 ]);
