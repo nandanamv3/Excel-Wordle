@@ -1,0 +1,38 @@
+
+.how-to-play {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    height: calc(100vh - 60px);
+    width: 100%;
+
+    overflow-y: auto;
+
+    padding-bottom: 100px;
+}
+
+.how-to-play h1, h3 {
+    margin: 0;
+	font-family: Helvetica, Arial, sans-serif;
+	color: white;
+	font-size:40px;
+}
+
+.how-to-play h3 {
+    font-size: 25px;
+}
+
+.how-to-play ul {
+    text-align: left;
+    font-size: 20px;
+    font-family: Helvetica, Arial, sans-serif;
+	color: white;
+}
+
+.how-to-play img {
+    width: 70%;
+    max-width: 400px;
+}

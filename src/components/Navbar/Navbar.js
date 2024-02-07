@@ -10,7 +10,11 @@ export default function Navbar() {
   if (userLoading) {
     return (
       <nav>
-        <h1>Wordle</h1>
+        <a href="/">
+          <h1>Wordle</h1>
+        </a>
+        <a className="how-to-play-link" href="/how-to-play"> How to play? </a>
+        <div className="spacer"></div>
         <span>Loading...</span>
       </nav>
     );
@@ -20,7 +24,11 @@ export default function Navbar() {
     console.log(userError);
     return (
       <nav>
-        <h1>Wordle</h1>
+        <a href="/">
+          <h1>Wordle</h1>
+        </a>
+        <a className="how-to-play-link" href="/how-to-play"> How to play? </a>
+        <div className="spacer"></div>
         <span>Error</span>
       </nav>
     );
@@ -29,7 +37,11 @@ export default function Navbar() {
   if (!userData.loggedIn) {
     return (
       <nav>
-        <h1>Wordle</h1>
+        <a href="/">
+          <h1>Wordle</h1>
+        </a>
+        <a className="how-to-play-link" href="/how-to-play"> How to play? </a>
+        <div className="spacer"></div>
         <a href={loginUrl} className="login-btn">Login</a>
       </nav>
     );
@@ -41,6 +53,8 @@ export default function Navbar() {
       <a href="/">
         <h1>Wordle</h1>
       </a>
+      <a className="how-to-play-link" href="/how-to-play"> How to play? </a>
+      <div className="spacer"></div>
       <img onClick={logout} className="avatar" src={userData.profilePictureUrl} alt={userData.name} />
     </nav>
   )
