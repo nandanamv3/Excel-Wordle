@@ -13,6 +13,7 @@ export default function HowToPlay() {
                 <li>For each letter that is correct but in the wrong position, you will get a yellow square.</li>
                 <li>For each letter that is not in the word, you get a grey square</li>
                 <li>You have 5 chances to guess the word.</li>
+                <li>Maintain your streak by finding the right word each day!</li>
                 <li>Good luck!</li>
             </ul>
             <h3>Example</h3>
