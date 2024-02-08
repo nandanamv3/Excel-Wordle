@@ -1,7 +1,7 @@
 nav {
 	box-sizing: border-box;
 	height: 60px;
-	width: 100%;
+	width: 100vw;
 	margin: 0;
 	border-bottom: 1px solid grey;
 	
@@ -62,4 +62,44 @@ nav h1 {
 
 .spacer {
 	flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+	nav {
+		padding: 0 20px;
+		gap: 10px;
+	}
+
+	nav h1 {
+		font-size: 30px;
+	}
+
+	.login-btn {
+		font-size: 14px;
+		padding: 8px 16px;
+	}
+
+	.how-to-play-link {
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 600px) {
+	nav {
+		padding: 0 10px;
+		gap: 5px;
+	}
+
+	nav h1 {
+		font-size: 25px;
+	}
+
+	.login-btn {
+		font-size: 12px;
+		padding: 6px 12px;
+	}
+
+	.how-to-play-link {
+		font-size: 14px;
+	}
 }

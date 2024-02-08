@@ -1,10 +1,13 @@
 .home {
-    display: flex;
-    height: calc(100vh - 170px);
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+	box-sizing: border-box;
+	display: flex;
+	height: calc(100vh - 60px);
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 0;
+	padding: 0;
 }
 
 .home h1 {
@@ -15,54 +18,85 @@
 }
 
 .home h2 {
-    margin: 0;
+	margin: 0;
 	font-family: Helvetica, Arial, sans-serif;
 	color: white;
 	font-size: 25px;
-    transform: rotateZ(-7deg);
+	transform: rotateZ(-7deg);
 
-    padding: 50px 0;
+	padding: 50px 0;
 }
 
 .home-btn {
-    box-sizing: border-box;
-    padding: 20px;
-    font-size: 20px;
-    background-color: #fff;
-    color: #000;
+	box-sizing: border-box;
+	padding: 20px;
+	font-size: 20px;
+	background-color: #fff;
+	color: #000;
 
-    width: 170px;
-    margin: 10px;
-    border: 2px solid #000;
+	width: 170px;
+	margin: 10px;
+	border: 2px solid #000;
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
-    text-decoration: none;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: row;
+	text-decoration: none;
 
-    gap: 10px;
+	gap: 10px;
 }
 
 .home-btn:hover {
-    background-color: #000;
-    color: #fff;
-    border: 2px solid #fff;
-    cursor: pointer;
+	background-color: #000;
+	color: #fff;
+	border: 2px solid #fff;
+	cursor: pointer;
 }
 
 .home-btn-icon {
-    width: 30px;
-    height: 30px;
+	width: 30px;
+	height: 30px;
 }
 
 .home-btn:hover .home-btn-icon {
-    filter: invert(1);
+	filter: invert(1);
 }
 
 .back-btn {
-    font-size: 16px;
+	font-size: 16px;
 }
 .back-btn .flipX {
-    transform: scaleX(-1);
+	transform: scaleX(-1);
+}
+
+@media (max-width: 600px) {
+	.home h1 {
+		font-size: 40px;
+	}
+
+	.home h2 {
+		font-size: 20px;
+	}
+
+    .home-btn {
+        font-size: 16px;
+        padding: 15px;
+        width: 150px;
+    }
+}
+
+@media (max-width: 400px) {
+    .home h1 {
+        font-size: 30px;
+    }
+
+    .home h2 {
+        font-size: 15px;
+    }
+
+    .home-btn {
+        font-size: 14px;
+        padding: 15px;
+    }
 }
