@@ -55,7 +55,13 @@ export default function Navbar() {
       </a>
       <a className="how-to-play-link" href="/how-to-play"> How to play? </a>
       <div className="spacer"></div>
-      <img onClick={logout} className="avatar" src={userData.profilePictureUrl} alt={userData.name} />
+      <img 
+        onClick={logout}
+        className="avatar"
+        src={userData.profilePictureUrl}
+        alt={userData.name}
+        referrerPolicy="no-referrer"
+      />
     </nav>
   )
 }

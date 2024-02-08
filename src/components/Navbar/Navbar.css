@@ -62,12 +62,13 @@ nav h1 {
 
 .spacer {
 	flex-grow: 1;
+	display: block;
 }
 
 @media (max-width: 768px) {
 	nav {
 		padding: 0 20px;
-		gap: 10px;
+		gap: 20px;
 	}
 
 	nav h1 {
@@ -82,12 +83,16 @@ nav h1 {
 	.how-to-play-link {
 		font-size: 16px;
 	}
+
+	nav .spacer {
+		display: none;
+	}
 }
 
-@media (max-width: 600px) {
+@media (max-width: 350px) {
 	nav {
 		padding: 0 10px;
-		gap: 5px;
+		gap: 20px;
 	}
 
 	nav h1 {
@@ -101,5 +106,9 @@ nav h1 {
 
 	.how-to-play-link {
 		font-size: 14px;
+	}
+
+	nav .spacer {
+		display: none;
 	}
 }
