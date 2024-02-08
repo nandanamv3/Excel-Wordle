@@ -43,3 +43,29 @@
     max-width: 100px;
     font-size: 20px;
 }
+
+@media (max-width: 768px) {
+    .leaderboard-table {
+        width: 95%;
+    }
+    .leaderboard th, td {
+        padding: 5px;
+        font-size: 15px;
+    }
+    .leaderboard h1 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .leaderboard-table {
+        width: 90%;
+    }
+    .leaderboard th, td {
+        padding: 5px;
+        font-size: 15px;
+    }
+    .leaderboard h1 {
+        font-size: 25px;
+    }
+}
