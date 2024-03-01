@@ -45,11 +45,16 @@ export function GameState({ children }) {
                 setError('');
                 const registerStatusRes = await axiosWordlePrivate.get('/register-status');
                 const { registered, launched, finished } = registerStatusRes.data;
+                console.log('registerStatusRes', registerStatusRes.data);
 
                 setGameSeriesStarted(launched);
                 setGameSeriesOver(finished);
 
+                console.log('launched', launched);
+                console.log('finished', finished);
+
                 if (!finished && !registered) {
+                    console.log('registering');
                     await axiosWordlePrivate.post('/register');
                 }
 
@@ -65,10 +70,16 @@ export function GameState({ children }) {
     const getCurrentStatus = useCallback(
         async function () {
             try {
+
                 setCurrentStatusLoading(true);
                 setError('');
                 await registerIfNotRegistered();
                 setError('');
+
+                if(currentStatusLoading|| !gameSeriesStarted || gameSeriesOver) {
+                    return;
+                }
+                
                 const response = await axiosWordlePrivate.get('/current-status');
                 const wordLength = response.data.wordlength;
 
