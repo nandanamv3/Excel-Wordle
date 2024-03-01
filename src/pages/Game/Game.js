@@ -4,6 +4,7 @@ import Keyboard from "../../components/Keyboard";
 import { useContext } from "react";
 import GameOver from "../../components/GameOver";
 import GameContext from "../../contexts/game/gameContext";
+import leaderboard from "../../assets/leaderboard.png";
 
 function Game() {
     const {
@@ -43,7 +44,14 @@ function Game() {
     if (gameSeriesOver) {
         return (
             <div className="game">
-                <span>That's a wrap. See you at Excel!</span>
+                <h2>That's a wrap. See you at Excel!</h2>
+                <a className="home-btn" href="/leaderboard">
+                    <span>
+                        Leaderboard
+                    </span>
+                    <img className="home-btn-icon" src={leaderboard} alt="leaderboard" />
+
+                </a>
             </div>
         )
     }
@@ -51,7 +59,7 @@ function Game() {
     return (
         <div className="game">
             <Board />
-            {gameOver.gameOver ? <GameOver 
+            {gameOver.gameOver ? <GameOver
                 currAttempt={currAttempt}
                 gameOver={gameOver}
                 correctWord={undefined}
